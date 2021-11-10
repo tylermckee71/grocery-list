@@ -5,16 +5,16 @@ import TextField from '@mui/material/TextField';
 
 
 
-export default function ListItem({item = 'Test Item'}) {
+export default function ListItem({item = 'Test Item', deleteItem}) {
     const [editActive, setEditActive] = useState(false)
 
     const handleDeleteClick = () => {
-        console.log('item deleted')
+        deleteItem(item)
     }
 
     return (
         <div style={styles}>
-            {editActive ?<TextField defaultValue={item} id="standard-basic" variant="standard" />: <div style={itemNameStyle}>{item}</div>}
+            {editActive ?<TextField defaultValue={item} id="standard-basic" variant="standard" /> : <div style={itemNameStyle}>{item}</div>}
             <EditIcon onClick={() => setEditActive(!editActive)} />
             <DeleteIcon onClick={handleDeleteClick} />
         </div>

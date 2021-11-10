@@ -12,6 +12,11 @@ export default function GroceryList() {
         setMainTextInput('')
     }
 
+    const deleteItem = (item) => {
+        const listWithRemovedItem = listItems.filter((i) => i !== item)
+        setListItems(listWithRemovedItem)
+    }
+
     const handleMainInputEnterKeyPress = (e) => {
         if(e.key === 'Enter') addItem()
     }
@@ -22,7 +27,7 @@ export default function GroceryList() {
                 <TextField onKeyPress={handleMainInputEnterKeyPress} value={mainTextInput} onChange={(e) => setMainTextInput(e.target.value)} id="standard-basic" variant="standard" />
                 <AddCircleIcon onClick={addItem}/>
             </div>
-            {listItems.map((item,index) => <ListItem item={item} key={`${item}-${index}`} />)}
+            {listItems.map((item,index) => <ListItem deleteItem={deleteItem} item={item} key={`${item}-${index}`} />)}
         </div>
     )
 }
