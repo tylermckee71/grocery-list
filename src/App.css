@@ -4,8 +4,6 @@
 
 .App-header {
   padding-top: 100px;
-  background-color: #ccdcfa;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;

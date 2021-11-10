@@ -1,5 +1,5 @@
-import './App.css';
-import GroceryList from './components/GroceryList'
+import "./App.css";
+import GroceryList from "./components/GroceryList";
 
 function App() {
   return (
