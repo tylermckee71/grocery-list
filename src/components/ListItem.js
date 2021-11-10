@@ -4,10 +4,10 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import TextField from "@mui/material/TextField";
 
 export default function ListItem({
-  item = "Test Item",
-  index,
-  editItem,
-  deleteItem,
+  item = { name: "Test Item", id: "id" },
+  index = 0,
+  editItem = () => console.log("add edit functionality"),
+  deleteItem = () => console.log("add delete functionality"),
 }) {
   const [editActive, setEditActive] = useState(false);
   const [textInput, setTextInput] = useState(item?.name);

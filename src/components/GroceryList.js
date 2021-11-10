@@ -4,7 +4,7 @@ import ListItem from "./ListItem";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { getUniqueID } from "../generateID";
 
-export default function GroceryList({ items }) {
+export default function GroceryList({ items = [] }) {
   const [listItems, setListItems] = useState([]);
   const [mainTextInput, setMainTextInput] = useState();
 
