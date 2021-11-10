@@ -10,10 +10,10 @@ export default function ListItem({
   deleteItem,
 }) {
   const [editActive, setEditActive] = useState(false);
-  const [textInput, setTextInput] = useState(item);
+  const [textInput, setTextInput] = useState(item?.name);
 
   const handleEditSubmit = () => {
-    editItem({ item: textInput, index });
+    editItem({ item: { name: textInput, id: item.id }, index });
     setEditActive(false);
   };
 
@@ -37,7 +37,7 @@ export default function ListItem({
           variant="standard"
         />
       ) : (
-        <div style={itemNameStyle}>{item}</div>
+        <div style={itemNameStyle}>{item.name}</div>
       )}
       <EditIcon onClick={() => setEditActive(!editActive)} />
       <DeleteIcon onClick={handleDeleteClick} />

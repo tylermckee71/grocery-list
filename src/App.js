@@ -6,7 +6,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <p>Grocery List</p>
-        <GroceryList />
+        <GroceryList items={[]} />
       </header>
     </div>
   );

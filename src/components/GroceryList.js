@@ -1,33 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import ListItem from "./ListItem";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
+import { getUniqueID } from "../generateID";
 
-export default function GroceryList() {
+export default function GroceryList({ items }) {
   const [listItems, setListItems] = useState([]);
   const [mainTextInput, setMainTextInput] = useState();
 
   const addItem = () => {
-    setListItems([mainTextInput, ...listItems]);
+    setListItems([{ name: mainTextInput, id: getUniqueID() }, ...listItems]);
     setMainTextInput("");
   };
 
   const editItem = ({ item, index }) => {
     const listCopy = [...listItems];
-    console.log({ item, index });
-    const listWithEditedItem = listCopy.splice(index, 1, item);
-    console.log({ listWithEditedItem });
+    listCopy.splice(index, 1, item);
     setListItems(listCopy);
   };
 
   const deleteItem = (item) => {
-    const listWithRemovedItem = listItems.filter((i) => i !== item);
+    const listWithRemovedItem = listItems.filter((i) => i.id !== item.id);
     setListItems(listWithRemovedItem);
   };
 
   const handleMainInputEnterKeyPress = (e) => {
     if (e.key === "Enter") addItem();
   };
+
+  useEffect(() => {
+    setListItems(items);
+    return () => {
+      setListItems([]);
+    };
+  }, [items]);
 
   return (
     <div>
@@ -47,7 +53,7 @@ export default function GroceryList() {
           deleteItem={deleteItem}
           item={item}
           index={index}
-          key={`${item}-${index}`}
+          key={`${item.id}-${index}`}
         />
       ))}
     </div>
@@ -56,4 +62,5 @@ export default function GroceryList() {
 
 const textInputStyle = {
   display: "flex",
+  justifyContent: "space-around",
 };
