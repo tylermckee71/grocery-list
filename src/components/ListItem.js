@@ -3,8 +3,23 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import TextField from "@mui/material/TextField";
 
-export default function ListItem({ item = "Test Item", deleteItem }) {
+export default function ListItem({
+  item = "Test Item",
+  index,
+  editItem,
+  deleteItem,
+}) {
   const [editActive, setEditActive] = useState(false);
+  const [textInput, setTextInput] = useState(item);
+
+  const handleEditSubmit = () => {
+    editItem({ item: textInput, index });
+    setEditActive(false);
+  };
+
+  const handleInputEnterKeyPress = (e) => {
+    if (e.key === "Enter" && editActive) handleEditSubmit();
+  };
 
   const handleDeleteClick = () => {
     deleteItem(item);
@@ -13,7 +28,14 @@ export default function ListItem({ item = "Test Item", deleteItem }) {
   return (
     <div style={styles}>
       {editActive ? (
-        <TextField defaultValue={item} id="standard-basic" variant="standard" />
+        <TextField
+          value={textInput}
+          onChange={(e) => setTextInput(e.target.value)}
+          onKeyPress={handleInputEnterKeyPress}
+          defaultValue={item}
+          id="standard-basic"
+          variant="standard"
+        />
       ) : (
         <div style={itemNameStyle}>{item}</div>
       )}

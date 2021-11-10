@@ -12,6 +12,14 @@ export default function GroceryList() {
     setMainTextInput("");
   };
 
+  const editItem = ({ item, index }) => {
+    const listCopy = [...listItems];
+    console.log({ item, index });
+    const listWithEditedItem = listCopy.splice(index, 1, item);
+    console.log({ listWithEditedItem });
+    setListItems(listCopy);
+  };
+
   const deleteItem = (item) => {
     const listWithRemovedItem = listItems.filter((i) => i !== item);
     setListItems(listWithRemovedItem);
@@ -35,8 +43,10 @@ export default function GroceryList() {
       </div>
       {listItems.map((item, index) => (
         <ListItem
+          editItem={editItem}
           deleteItem={deleteItem}
           item={item}
+          index={index}
           key={`${item}-${index}`}
         />
       ))}
